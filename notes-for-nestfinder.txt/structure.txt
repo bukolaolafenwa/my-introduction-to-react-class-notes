@@ -1,0 +1,183 @@
+=========STARTING VERSION: 
+For the starting version, let students build the designs, keep sample arrays inside the pages and use `.map()` to display repeated content.
+
+Use this structure:
+
+======
+nestfinder/
+├── frontend/
+│   ├── public/
+│   ├── src/
+│   │   ├── assets/
+│   │   │   ├── images/
+│   │   │   └── icons/
+│   │   │
+│   │   ├── components/
+│   │   │   ├── Navbar.tsx
+│   │   │   ├── Footer.tsx
+│   │   │   ├── PropertyList.tsx
+│   │   │   ├── PasswordInput.tsx
+│   │   │   ├── PropertyEditor.tsx
+│   │   │   └── AdminPropertyTable.tsx
+│   │   │
+│   │   ├── layouts/
+│   │   │   ├── Layout.tsx
+│   │   │   └── AdminLayout.tsx
+│   │   │
+│   │   ├── pages/
+│   │   │   ├── Home.tsx
+│   │   │   ├── Properties.tsx
+│   │   │   ├── PropertyDetails.tsx
+│   │   │   ├── Login.tsx
+│   │   │   ├── SignUp.tsx
+│   │   │   ├── ForgotPassword.tsx
+│   │   │   ├── ResetPassword.tsx
+│   │   │   ├── ResetSuccess.tsx
+│   │   │   ├── NotFound.tsx
+│   │   │   │
+│   │   │   └── admin/
+│   │   │       ├── AdminDashboard.tsx
+│   │   │       ├── AddProperty.tsx
+│   │   │       ├── ManageProperties.tsx
+│   │   │       └── EditProperty.tsx
+│   │   │
+│   │   ├── types/
+│   │   │   └── property.ts
+│   │   │
+│   │   ├── utils/
+│   │   │   └── formatCurrency.ts
+│   │   │
+│   │   ├── App.tsx
+│   │   ├── main.tsx
+│   │   ├── index.css
+│   │   └── vite-env.d.ts
+│   │
+│   ├── index.html
+│   ├── package.json
+│   ├── package-lock.json
+│   ├── tsconfig.json
+│   ├── vite.config.ts
+│   └── README.md
+│
+├── backend/                 ← Add later; do not create yet
+├── .gitignore
+└── README.md
+======
+
+
+
+============
+WHAT GOES WHERE?
+
+`nestfinder/` is the whole project repository. All current application code goes inside `frontend/`.
+
+| Location    | What goes there                                |
+|-------------|------------------------------------------------|
+| `frontend/` | The complete React and TypeScript application. |
+| `backend/` | Add later when teaching server-side development. |
+| Root `.gitignore` | Rules telling Git to ignore dependencies, builds and environment files. |
+| Root `README.md` | Project overview, team members, responsibilities and setup instructions. |
+
+Inside `frontend/src/`
+| Folder           | What goes there                              |
+|------------------|----------------------------------------------|
+| `assets/images/` | Property photos, authentication pictures, logos and illustrations. |
+| `assets/icons/` | SVG icons imported and displayed using `<img>`. |
+| `components/` | Reusable interface sections and controls. |
+| `layouts/` | Shared page structure with `<Outlet />`. |
+| `pages/` | Individual screens connected to routes. |
+| `pages/admin/` | Dashboard and property-management screens. |
+| `types/` | Shared TypeScript interfaces and types. |
+| `utils/` | Small reusable helper functions. |
+
+Components
+| File               | What students write there |
+|--------------------|---------------------------|
+| `Navbar.tsx` | Logo, navigation links, Login/Sign Up links and mobile-menu behaviour. |
+| `Footer.tsx` | Footer links, contact information and newsletter form. |
+| `PropertyList.tsx` | `.map()` that turns the received properties array into cards. |
+| `PasswordInput.tsx` | Reusable password input with a visibility toggle. |
+| `PropertyEditor.tsx` | Shared Add/Edit form, image previews and amenities checkboxes. |
+| `AdminPropertyTable.tsx` | Property table rows, Edit links and optional Delete controls. |
+
+Layouts
+| File              | What students write there |
+|-------------------|-----------------------------------------|
+| `Layout.tsx` | Navbar, public-page `<Outlet />` and Footer. |
+| `AdminLayout.tsx` | Admin sidebar and an `<Outlet />` for admin pages. |
+
+Public pages
+| File                   | What students write there |
+|------------------------|-------------------------------|
+| `Home.tsx` | Hero, featured properties and other homepage sections. |
+| `Properties.tsx` | Listings banner, dropdown filters, sorting, property results and pagination. |
+| `PropertyDetails.tsx` | Selected property’s gallery, description, features, map, agent and related properties. |
+| `Login.tsx` | Login form and validation. |
+| `SignUp.tsx` | Registration form, password confirmation and terms checkbox. |
+| `ForgotPassword.tsx` | Email recovery form. |
+| `ResetPassword.tsx` | New-password and confirm-password form. |
+| `ResetSuccess.tsx` | Success message and Go to Login link. |
+| `NotFound.tsx` | Unknown-URL message and Home link. |
+
+Admin pages
+| File                 | What students write there |
+|----------------------|-------------------------------------------|
+| `AdminDashboard.tsx` | Summary statistics and recent properties. |
+| `AddProperty.tsx` | Empty property editor and submission feedback. |
+| `ManageProperties.tsx` | Property-management table and local deletion state. |
+| `EditProperty.tsx` | Route-ID lookup and the editor filled with the selected property. |
+
+Types, helpers and application setup
+
+| File                     | What goes there                       |
+|--------------------------|---------------------------------------|
+| `types/property.ts` | The `Property` interface describing each property object. |
+| `utils/formatCurrency.ts` | A function that formats prices as naira. |
+| `App.tsx` | Route definitions connecting URLs, layouts and pages. |
+| `main.tsx` | React entry point and `BrowserRouter` setup. |
+| `index.css` | Tailwind import and shared styling. |
+| `vite-env.d.ts` | Vite’s TypeScript declarations. |
+
+Inside `frontend/`, outside `src/`
+
+| File/folder      | What goes there                             |
+|------------------|---------------------------------------------|
+| `public/` | Files referenced directly by URL without importing them. Your starter’s pictures are in `src/assets/images/`. |
+| `index.html` | HTML document containing React’s root element. |
+| `package.json` | Dependencies and commands such as `npm run dev`. |
+| `package-lock.json` | Recorded dependency versions; commit this to Git. |
+| `tsconfig*.json` | TypeScript configuration files supplied by the project template. |
+| `vite.config.ts` | Vite and plugin configuration. |
+| `README.md` | Frontend-specific setup and learning instructions. |
+
+For the starting lesson, write property arrays inside the relevant pages.** For example, `Properties.tsx` holds its sample array and passes it to `PropertyList.tsx`. When multiple pages need the same records, move that array into `frontend/src/data/properties.ts`.
+
+============
+
+For this starting version, the helper is `money()`, stored in:
+frontend/src/utils/formatCurrency.ts
+
+It formats numeric prices as Nigerian naira.
+
+Helper and purpose
+
+| Helper         | Purpose                                        |
+|----------------|------------------------------------------------|
+| `money(value)` | Converts a number such as `8000000` into a formatted price such as `₦8,000,000`. |
+
+---
+*Where it is used*
+
+| File                          | Where the helper is used |
+|-------------------------------|--------------------------|
+| `components/PropertyList.tsx` | Formats prices on property cards. |
+| `pages/PropertyDetails.tsx` | Formats the selected property’s price. |
+| `components/AdminPropertyTable.tsx` | Formats prices in the admin table. |
+
+Import it into those files:
+import { money } from "../utils/formatCurrency";
+
+Then call it inside JSX:
+<strong>{money(property.price)}</strong>
+
+Home and Properties benefit through `PropertyList`; Admin Dashboard and Manage Properties benefit through `AdminPropertyTable`. **Those pages do not need to import the helper themselves.

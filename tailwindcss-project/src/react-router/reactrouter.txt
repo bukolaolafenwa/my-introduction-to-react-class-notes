@@ -1,0 +1,41 @@
+Introduction to React Router
+Routing means deciding which page to display based on the URL.
+
+For example:
+-------------------------------------------------------
+| URL path             | Page displayed               |
+|----------------------|------------------------------|
+| `/`                  | Home                         |
+| `/about`             | About                        |
+| `/courses`           | Courses                      |
+| `/courses/html`      | Details about HTML           |
+| `/dashboard/profile` | Profile inside the dashboard |
+-------------------------------------------------------
+Without routing, students might render several components together:
+
+function App() {
+  return (
+    <>
+      <Home />
+      <About />
+      <Courses />
+    </>
+  );
+}
+
+This displays all three components on the same page.
+
+
+With routing, we describe which component should appear at each URL.
+React Router connects URL paths to React components.** Its declarative approach uses components such as `BrowserRouter`, `Routes`, and `Route`. You already know how to create components. Routing lets us choose which component to show when someone visits a particular address.
+
+
+Learning goals
+By the end, you should be able to:
+1. Set up browser routing.
+2. Connect paths to page components.
+3. Navigate using `Link`.
+4. Create routes containing changing values.
+5. Read route parameters.
+6. Display child pages inside a shared layout.
+7. Navigate or redirect users to another page.
