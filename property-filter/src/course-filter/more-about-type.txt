@@ -1,0 +1,49 @@
+A **union type** lets you say that a value can be **one of several options**. The `|` symbol means “or.”
+
+`ts
+type ListingType = "sale" | "rent";
+
+let listingType: ListingType = "rent"; // Valid
+listingType = "sale";                  // Valid
+listingType = "sold";                  // TypeScript error
+
+
+Read `ListingType` as “the string `"sale"` or the string `"rent"`.” These are called **string literal types** because each option is an exact string value. With a string union, you assign `"rent"` directly. With the enum from the previous example, you would write `ListingType.Rent`.
+
+Use a union inside an interface
+In NestFinder, the interface describes the fields of a property, and the union restricts the value of one field.
+
+`ts
+type ListingType = "sale" | "rent";
+
+interface Property {
+  id: number;
+  title: string;
+  listingType: ListingType;
+}
+
+const property: Property = {
+  id: 1,
+  title: "Two-bedroom flat in Yaba",
+  listingType: "rent",
+};
+
+
+### Use a union for React state
+
+If your property filter has three options, you can use a union to describe its possible states.
+
+`tsx
+type ListingFilter = "all" | ListingType;
+
+// Inside your React component
+const [selectedFilter, setSelectedFilter] =
+  useState<ListingFilter>("all");
+
+setSelectedFilter("sale"); // Valid
+setSelectedFilter("sold"); // TypeScript error
+
+
+`ListingFilter` allows `"all"`, `"sale"`, or `"rent"`. This lets the **filter** show all listings while each **property** still has a listing type of `"sale"` or `"rent"`.
+
+Unions can also combine different kinds of values. For example, `string | number` accepts either `"123"` or `123`.
