@@ -1,0 +1,21 @@
+[
+
+    {
+        "id": 1,
+        "title": "Two Bedroom Flat",
+        "location": "Ikeja",
+        "price": 3000000
+    },
+    {
+        "id": 2,
+        "title": "Three Bedroom Apartment",
+        "location": "Lekki",
+        "price": 5000000
+    },
+    {
+        "id": 3,
+        "title": "Studio Apartment",
+        "location": "Ikeja",
+        "price": 1500000
+    }
+]

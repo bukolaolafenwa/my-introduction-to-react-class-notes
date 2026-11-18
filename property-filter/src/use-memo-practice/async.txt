@@ -1,0 +1,51 @@
+// `async` 
+// Write `async` before a function’s body to allow `await` inside it. An async function always returns a Promise.
+
+// `await`
+// `await` pauses the async function until a Promise finishes. For example, `await fetch("/properties.json")` waits for the response before continuing to the next line. The rest of the webpage can still work.
+
+// `try`
+// Put code that might fail inside a `try` block. JavaScript attempts to run it. If an error is thrown, it skips the remaining code in that block and moves to `catch`.
+
+// `catch` 
+// `catch` handles an error from the `try` block. For example, it can display “Unable to load properties” when loading fails.
+
+// ROLE OF USEEFFECT
+// `useEffect` starts the data-loading work after the component renders.
+
+// Inside it, we call an `async` function so we can use **`await` to wait for the response and read the data.
+// `try` attempts those loading steps, and `catch` handles any errors.
+// So, `useEffect` controls when the work starts; `async`, `await`, `try`, and `catch` control how that work is carried out.
+
+// Dependency array
+// A dependency array lists the values a Hook watches for changes. Its meaning depends on whether you are using useEffect or useMemo.
+
+// For useEffect:
+// Dependency array	   When the effect runs
+// []	               After the component first appears
+// [quantity]	       After it first appears and whenever quantity changes
+// No array	           After every render
+
+
+// For example, your property-loading effect uses an empty array because it does not read any changing props or state:
+// useEffect(() => {
+//   // Load properties
+// }, []);
+
+// But an effect that uses quantity needs it as a dependency:
+// useEffect(() => {
+//   document.title = `Quantity: ${quantity}`;
+// }, [quantity]);
+
+
+====USEMEMO====
+useMemo remembers the result of a calculation between renders. It recalculates when a dependency changes.
+
+Its main uses are:
+- Avoiding repeated expensive calculations, such as processing a large amount of data.
+- Reusing filtered or sorted lists when the original data and filter conditions have not changed.
+- Keeping an object or array reference stable, which can help a child component optimised with React.memo skip unnecessary renders.
+
+- Memoization is an optimization technique that stores the results of expensive computations in a cache so future calls with the same inputs return the cached result immediately instead of recalculating. In React, useMemo is a Hook that applies memoization to computed values between component re-renders based on a dependency array.
+
+

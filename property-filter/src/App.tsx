@@ -1,6 +1,8 @@
-import CourseCard from "./components/CourseCard"
-import CoursePage from "./pages/CoursePage"
-import PropertyPage from "./pages/PropertyPage"
+
+// import CoursePage from "./pages/CoursePage"
+// import PropertyPage from "./pages/PropertyPage"
+
+import AsyncPropertyPage from "./pages/AsyncPropertyPage"
 
 function App() {
 
@@ -8,7 +10,8 @@ function App() {
   return (
     <>
       {/* <PropertyPage /> */}
-      <CoursePage />
+      {/* <CoursePage /> */}
+      <AsyncPropertyPage />
     </>
   )
 }
