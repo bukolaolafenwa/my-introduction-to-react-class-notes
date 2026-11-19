@@ -181,3 +181,468 @@ Then call it inside JSX:
 <strong>{money(property.price)}</strong>
 
 Home and Properties benefit through `PropertyList`; Admin Dashboard and Manage Properties benefit through `AdminPropertyTable`. **Those pages do not need to import the helper themselves.
+
+
+
+
+=============================GIT AND GITHUB WORKFLOW==================================
+# Git and GitHub Workflow — NestFinder
+
+This guide covers creating a repository, cloning it, working on branches and receiving updates.
+
+**For our shared NestFinder project, begin at Step 4 because the repository already exists. Steps 1–3 explain how to set up a new repository yourself.**
+
+Run each section when needed; do not run every command at once.
+
+-------------
+1. Configure Git
+
+Run these commands once per computer, using your own name and GitHub-associated email:
+git config --global user.name "Your Full Name"
+git config --global user.email "your-email@example.com"
+
+Check your settings:
+git config --global user.name
+git config --global user.email
+
+
+--------------
+2. Initialise a New Repository
+Use this section when creating your own repository from an existing local project.
+Open the terminal inside the main project folder:
+git init -b main
+
+Before staging files, create a `.gitignore` file containing:
+```gitignore
+node_modules/
+dist/
+.env
+.env.*
+!.env.example
+.DS_Store
+
+Check, stage and commit your files:
+git status
+git add .
+git status
+git commit -m "Set up project starter structure"
+Review the staged files before committing. Do not commit dependencies, generated build files or secret credentials.
+
+-----------
+3. Connect a New Repository to GitHub
+Create an empty repository on GitHub. Leave the README, `.gitignore` and licence options unselected when uploading an existing local project.
+
+Replace the URL below with your repository URL:
+git remote add origin https://github.com/YOUR-USERNAME/YOUR-REPOSITORY.git
+git remote -v
+git push -u origin main
+
+If your current branch has another name and you want to rename it to `main`:
+git branch -M main
+
+Then push:
+git push -u origin main
+
+-------------
+4. Clone the Shared NestFinder Repository
+Accept your GitHub collaborator invitation before attempting to push to the shared repository.
+
+Open a terminal in the folder where you want to keep the project. Replace `REPOSITORY_URL` with the NestFinder repository URL:
+git clone REPOSITORY_URL
+cd nestfinder
+cd frontend
+npm install
+npm run dev
+
+If the cloned folder has a different name, use that name instead of `nestfinder`.
+Open the local URL displayed in the terminal.
+Clone the repository once. You do not need to clone it again to receive updates.
+After cloning, do not run:
+git init
+git remote add origin ...
+
+Cloning already sets up Git and the `origin` connection.
+
+------------
+5. Create Your Feature Branch
+You can run Git commands while inside `frontend`. Your branch covers the entire NestFinder repository.
+
+Check your working tree and update `main`:
+git status
+git switch main
+git pull origin main
+Then run **only the command assigned to you**:
+
+| Team Member      | Branch Creation Command |
+|------------------|---------------------------------------------|
+| Fawaz Jinad | `git switch -c feature/homepage-navigation` |
+| Emmanuel Ogunrinde | `git switch -c feature/property-listings` |
+| Oreoluwa Onabajo | `git switch -c feature/property-details` |
+| Ibrahim Saka | `git switch -c feature/account-pages` |
+| Damilola Bakare | `git switch -c feature/admin-area` |
+
+Check your current branch:
+git branch
+
+The asterisk `*` identifies the current branch.
+Create a branch only once. To return to an existing branch, omit `-c`:
+git switch feature/property-listings
+Replace the example with your actual branch name.
+
+-----------
+6. Commit and Push Your Work
+After editing and saving your files:
+git status
+git diff
+git add .
+git status
+git commit -m "Build responsive property listings page"
+git push -u origin feature/property-listings
+Use your actual branch name and a message describing your changes.
+
+
+Check your folder before staging: `git add .` stages changes in your current folder and its subfolders. Inside `frontend`, it stages frontend changes. From the repository root, it stages changes throughout the repository.
+For later updates on the same branch:
+git add .
+git status
+git commit -m "Improve property listings mobile layout"
+git push
+
+-----------
+7. Open a Pull Request
+After pushing your branch:
+1. Open the NestFinder repository on GitHub.
+2. Select **Compare & pull request**.
+3. Set the base branch to `main`.
+4. Set the comparison branch to your feature branch.
+5. Add a clear title and description.
+6. Include screenshots for interface changes.
+7. Create the pull request for review.
+Explain what you changed, how you tested it and anything still incomplete.
+Wait for review before merging. Do not push directly to `main` unless asked to do so.
+
+------------
+8. Receive Updates Merged into Main
+Before switching branches, check your work:
+git status
+
+If you have unfinished changes you want to keep, save and commit them on your feature branch first:
+git add .
+git status
+git commit -m "Save progress on property listings"
+
+Then update your local `main`:
+git switch main
+git pull origin main
+Your local files now include the changes merged into `main` on GitHub.
+
+-------------
+9. Update Your Feature Branch
+After updating local `main`, bring those changes into your feature branch:
+git switch feature/property-listings
+git merge main
+
+Use your own branch name.
+
+If the merge succeeds, push your updated branch:
+git push
+
+The full update sequence, after committing unfinished work, is:
+git switch main
+git pull origin main
+git switch feature/property-listings
+git merge main
+git push
+
+
+-------------
+10. Run the Updated Application
+Inside `frontend`, install dependencies if the update changed them:
+npm install
+
+
+Start the application: npm run dev
+If you are already inside `frontend`, do not run `cd frontend` again.
+Before submitting your work, check the production build:
+npm run build
+
+
+-------------
+11. Resolve Merge Conflicts
+If Git reports conflicts:
+
+1. Open the affected files in VS Code.
+2. Review both versions.
+3. Keep or combine the correct changes.
+4. Remove all conflict markers.
+5. Save the files.
+6. Stage the resolved files.
+7. Complete the merge commit.
+
+For example, from inside `frontend`:
+git add src/App.tsx
+git status
+git commit -m "Resolve merge conflicts with main"
+git push
+
+Use the actual paths of all files you resolved. Test the application after resolving the conflicts.
+
+To cancel an unfinished merge:
+git merge --abort
+
+-------------
+12. Start a New Feature
+After your previous feature has been merged, start the next task from updated `main`:
+git switch main
+git pull origin main
+git switch -c feature/property-location-filter
+
+
+Choose a new branch name describing your next task.
+
+## Useful Checking Commands
+
+| Command | Purpose |
+|---------------------|--------------------------------------------|
+| `git status` | Check your branch, changed files and merge status |
+| `git branch` | List local branches |
+| `git branch -a` | List local and known remote branches |
+| `git remote -v` | Check connected repository URLs |
+| `git diff` | Review unstaged changes |
+| `git diff --staged` | Review staged changes |
+| `git log --oneline -5` | Show the latest five commits |
+| `git fetch origin` | Download remote updates without merging them |
+
+## Where to Run Commands
+
+| Command Type | Location |
+|--------------|---------------------------------------------|
+| Git commands | Inside `nestfinder` or any of its subfolders |
+| Frontend npm commands | Inside `frontend`, where its `package.json` is located |
+
+
+
+
+
+========================OUR FINAL TARGET PROJECT STRUCTURE========================
+nestfinder/
+├── frontend/
+│   ├── public/
+│   ├── src/
+│   │   ├── assets/
+│   │   │   ├── images/
+│   │   │   └── icons/
+│   │   │
+│   │   ├── components/
+│   │   │   ├── Navbar.tsx
+│   │   │   ├── Footer.tsx
+│   │   │   ├── PropertyCard.tsx
+│   │   │   ├── PropertyList.tsx
+│   │   │   ├── PropertyFilters.tsx
+│   │   │   ├── PropertyEditor.tsx
+│   │   │   └── AdminPropertyTable.tsx
+│   │   │
+│   │   ├── layouts/
+│   │   │   ├── Layout.tsx
+│   │   │   └── AdminLayout.tsx
+│   │   │
+│   │   ├── pages/
+│   │   │   ├── Home.tsx
+│   │   │   ├── Properties.tsx
+│   │   │   ├── PropertyDetails.tsx
+│   │   │   ├── Login.tsx
+│   │   │   ├── SignUp.tsx
+│   │   │   ├── ForgotPassword.tsx
+│   │   │   ├── ResetPassword.tsx
+│   │   │   ├── ResetSuccess.tsx
+│   │   │   ├── NotFound.tsx
+│   │   │   └── admin/
+│   │   │       ├── AdminDashboard.tsx
+│   │   │       ├── AddProperty.tsx
+│   │   │       ├── ManageProperties.tsx
+│   │   │       └── EditProperty.tsx
+│   │   │
+│   │   ├── data/
+│   │   │   └── properties.ts
+│   │   │
+│   │   ├── services/
+│   │   │   └── propertyService.ts
+│   │   │
+│   │   ├── hooks/
+│   │   │   ├── useProperties.ts
+│   │   │   ├── usePropertyDetails.ts
+│   │   │   └── useAdminProperties.ts
+│   │   │
+│   │   ├── types/
+│   │   │   └── property.ts
+│   │   │
+│   │   ├── utils/
+│   │   │   └── formatCurrency.ts
+│   │   │
+│   │   ├── App.tsx
+│   │   ├── main.tsx
+│   │   └── index.css
+│   │
+│   ├── index.html
+│   ├── package.json
+│   ├── package-lock.json
+│   ├── tsconfig.json
+│   ├── tsconfig.app.json
+│   ├── tsconfig.node.json
+│   └── vite.config.ts
+│
+├── backend/                 ← Add backend implementation later
+│
+├── .gitignore
+└── README.md
+
+
+
+
+
+
+
+==================GENERATIVE AI AND PROMPT ENGINEERING==============
+Generative AI and Prompt Engineering
+
+1. What is generative AI?
+Generative AI produces content such as text, images, audio, or code in response to an input. The instruction or question you give it is called a prompt.
+
+In software development, you can use generative AI to explain unfamiliar code, suggest an implementation, help diagnose an error, or review a proposed change. You can give the same tool different instructions depending on how much help you want. For example, “Give me a hint” and “Show me the complete solution” are two different requests.
+
+2. What is a large language model?
+A large language model, or LLM, processes and generates text. It breaks text and code into smaller units called tokens. When generating an answer, it predicts successive tokens based on patterns learned during training and the context available to it.
+
+An LLM can produce a convincing explanation even when it has misunderstood your code. For example, it might correctly explain that React list keys should be unique, then suggest using the array index in a list that users frequently reorder. The suggestion needs to be evaluated against how your application works.
+
+Class question: If an AI tool suggests a fix and the red underline disappears, what else would you check before accepting the change?
+
+
+3. Prompt engineering fundamentals
+Prompt engineering is the practice of writing and refining instructions so that the answer meets a specific goal. For a coding task, include the information a developer would need to help you.
+
+-------------------------------------------------------------------------
+Part of the prompt |	What to include
+-------------------------------------------------------------------------
+Goal	           |   What you want explained, built, or fixed
+Context	           |   The framework, language, and relevant feature
+Input	           |   The relevant code, sample data, or exact error message
+Requirements	   |   The expected behaviour and constraints
+Output format	   |  The kind of answer you want, such as an explanation, a minimal patch, or a test checklist
+
+
+Worked example — improve a debugging prompt
+First prompt
+Fix my React property list.
+Revised prompt
+I am building a property list in React and TypeScript. I use properties.map() to render PropertyCard components and pass key={property.id}. React reports “Encountered two children with the same key, 1.” My sample data contains three records with IDs 1, 1, and 3. Explain what causes the warning, show the smallest correction to the sample data, and tell me how to verify it. Keep the existing PropertyCard component.
+The revised prompt gives the model the exact warning, the relevant code, and enough sample data to identify the cause. It also limits the change to the data so you can verify the effect easily.
+
+
+-----------
+4. Use AI to generate, explain, debug, and optimise code
+Goals and example prompts
+-----------------------------------------------------------------
+| Goal        | Example prompt                                  |
+|-------------|----------------------------------------------------|
+| Generate | “Write a TypeScript function that filters properties by location. Make the comparison case-insensitive. Return all properties when the location is blank.” |
+| Explain | “Explain why this React component uses `.map()` to render cards. Show what the callback returns on its first iteration.” |
+| Debug | “Here is my error, my sample data, and the line that renders the list. Explain the likely cause and suggest the smallest change I can test.” |
+| Optimise | “Review this filter. Suggest a performance improvement only if it preserves the same results. Explain how I can compare the two versions.” |
+
+
+Goals and how to verify the answer
+--------------------------------------------------------------------------
+| Goal            | How to verify the answer                             |
+|-----------------|------------------------------------------------------|
+| Generate | Try `Yaba`, `yaba`, a blank string, and a location with no matches. Check that the first two return the same matches, the blank string returns all properties, and the unknown location returns an empty array. |
+| Explain | Trace the first record from the array through the `.map()` callback to the rendered card. Check that the card displays that record’s data. |
+| Debug | Reproduce the original error, apply the suggested change, and rerun the same example. Check that the error is resolved and the list still displays correctly. |
+| Optimise | Confirm that both versions return the same results. Measure their performance using the same realistic data before deciding whether the change is faster. |
+
+
+-------------
+5. AI productivity tools and responsible use
+A chat assistant such as ChatGPT can help you compare prompts, ask follow-up questions, or practise explaining code. An editor assistant such as GitHub Copilot can suggest code while you work. Your browser console, TypeScript checker, and test results give you evidence about how the suggestion behaves in your project.
+
+- Use sample data in prompts. Keep passwords, API keys, database connection strings, and real customer information private.
+- Share the smallest relevant code sample and follow your organisation’s rules for sharing private source code.
+- Review the changes before accepting them. Check that the suggested code preserves behaviour you still need.
+- Run examples that cover ordinary input, edge cases, and invalid input.
+- Be ready to explain every change you submit, and disclose AI assistance where your class or team requires it.
+
+----------
+Practice task — evaluate an AI answer
+1. Ask an AI assistant to write a TypeScript function that filters the NestFinder sample properties by location.
+2. Rewrite the prompt to specify case-insensitive matching, blank input, and what should happen when there are no matches.
+3. Run both answers with the same inputs.
+4. Record one difference and explain which answer better meets the requirements.
+Expected outcome: Yaba and yaba produce the same matches, a blank filter returns all properties, and an unknown location returns an empty array.
+
+
+
+===========Suggested final structure============
+nestfinder/
+├── public/
+├── src/
+│   ├── assets/
+│   │   ├── images/
+│   │   └── icons/
+│   │
+│   ├── components/
+│   │   ├── Navbar.tsx
+│   │   ├── Footer.tsx
+│   │   ├── PropertyCard.tsx
+│   │   ├── PropertyList.tsx
+│   │   ├── PropertyFilters.tsx
+│   │   ├── PropertyEditor.tsx
+│   │   └── AdminPropertyTable.tsx
+│   │
+│   ├── layouts/
+│   │   ├── Layout.tsx
+│   │   └── AdminLayout.tsx
+│   │
+│   ├── pages/
+│   │   ├── Home.tsx
+│   │   ├── Properties.tsx
+│   │   ├── PropertyDetails.tsx
+│   │   ├── Login.tsx
+│   │   ├── SignUp.tsx
+│   │   ├── ForgotPassword.tsx
+│   │   ├── ResetPassword.tsx
+│   │   ├── ResetSuccess.tsx
+│   │   ├── NotFound.tsx
+│   │   │
+│   │   └── admin/
+│   │       ├── AdminDashboard.tsx
+│   │       ├── AddProperty.tsx
+│   │       ├── ManageProperties.tsx
+│   │       └── EditProperty.tsx
+│   │
+│   ├── data/
+│   │   └── properties.ts
+│   │
+│   ├── services/
+│   │   └── propertyService.ts
+│   │
+│   ├── hooks/
+│   │   ├── useProperties.ts
+│   │   ├── usePropertyDetails.ts
+│   │   └── useAdminProperties.ts
+│   │
+│   ├── types/
+│   │   └── property.ts
+│   │
+│   ├── utils/
+│   │   └── formatCurrency.ts
+│   │
+│   ├── App.tsx
+│   ├── main.tsx
+│   └── index.css
+│
+├── .gitignore
+├── package.json
+├── package-lock.json
+├── tsconfig.json
+├── vite.config.ts
+└── README.md
